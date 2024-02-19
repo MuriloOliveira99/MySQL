@@ -1,7 +1,8 @@
--- CREATE DATABASE lms;
--- USE lms;
+CREATE DATABASE lms;
+USE lms;
 -- DROP DATABASE lms;
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------- --
+
 
 -- Tabela Usuario
 CREATE TABLE IF NOT EXISTS usuario(
@@ -112,6 +113,20 @@ CREATE TABLE IF NOT EXISTS disciplina(
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------------- --
 
 
+-- Tabela Curso
+CREATE TABLE IF NOT EXISTS curso(
+	id SMALLINT AUTO_INCREMENT,
+    nome VARCHAR(50),
+    
+    -- Constraints
+    CONSTRAINT PK_curso PRIMARY KEY(id),
+    CONSTRAINT UQ_curso_nome UNIQUE(nome)
+);
+
+
+-- ---------------------------------------------------------------------------------------------------------------------------------------------------------- --
+
+
 -- Tabela Disciplina Ofertada
 CREATE TABLE IF NOT EXISTS disciplina_ofertada(
     id int NOT NULL AUTO_INCREMENT,
@@ -156,7 +171,7 @@ CREATE TABLE IF NOT EXISTS solicitacao_matricula(
 	PRIMARY KEY (`id`),
 	CONSTRAINT `FK_solicitacao_matricula_aluno` FOREIGN KEY(id_aluno) REFERENCES aluno(id),
 	CONSTRAINT `FK_solicitacao_matricula_coordenador` FOREIGN KEY(id_coordenador) REFERENCES coordenador(id),
-	CONSTRAINT `FK_solicitacao_matricula_disciplina_ofertada` FOREIGN KEY(id_disciplina_ofertad) REFERENCES disciplina_ofertada(id)
+	CONSTRAINT `FK_solicitacao_matricula_disciplina_ofertada` FOREIGN KEY(id_disciplina_ofertada) REFERENCES disciplina_ofertada(id)
 );
 
 
@@ -195,7 +210,7 @@ CREATE TABLE IF NOT EXISTS atividade_vinculada(
 
 	-- CONSTRAINTS
 	CONSTRAINT PK_atividade_vinculada PRIMARY KEY (id),
-	CONSTRAINT UQ_atividade_vinculada_rotulo_id_atividade_id_disciplina_ofertada UNIQUE (rotulo, id_atividade, id_disciplina_ofertada),
+	CONSTRAINT UQ_rotulo_id_atividade_id_disciplina_ofertada UNIQUE (rotulo, id_atividade, id_disciplina_ofertada),
 	CONSTRAINT FK_id_atividade_atividade_vinculada FOREIGN KEY (id_atividade) REFERENCES atividade (id),
 	CONSTRAINT FK_id_professor_atividade_vinculada FOREIGN KEY (id_professor) REFERENCES professor (id),
 	CONSTRAINT FK_id_disciplina_ofertada_atividade_vinculada FOREIGN KEY (id_disciplina_ofertada) REFERENCES disciplina_ofertada (id)
