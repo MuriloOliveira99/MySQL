@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS usuario(
 
 -- Tabela Coordenador
 CREATE TABLE IF NOT EXISTS coordenador(
-    id smallint NOT NULL AUTO_INCREMENT,
+    id SMALLINT NOT NULL AUTO_INCREMENT,
     id_usuario INT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -253,7 +253,7 @@ CREATE TABLE IF NOT EXISTS mensagem (
 	assunto VARCHAR(100) NOT NULL,
 	referencia VARCHAR(100) NOT NULL,
 	conteudo VARCHAR(100) NOT NULL,
-	status ENUM('Enviado', 'Lido', 'Respondido') NOT NULL DEFAULT 'Enviado',
+	`status` ENUM('Enviado', 'Lido', 'Respondido') NOT NULL DEFAULT 'Enviado',
 	data_envio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	data_resposta DATETIME DEFAULT NULL,
 	resposta VARCHAR(1000) DEFAULT NULL,
